@@ -1,0 +1,18 @@
+ @startuml
+interface Colegio {
+Mostrarconfoirmado();
+}
+class departamento{
+id,
+Nombre
+}
+
+class profesor {
+NRP,
+Nombre,
+Categoria,
+Area,
+}
+
+
+@enduml
