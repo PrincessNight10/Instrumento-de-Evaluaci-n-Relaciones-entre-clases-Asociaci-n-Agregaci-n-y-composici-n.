@@ -1,18 +1,57 @@
- @startuml
-interface Colegio {
-Mostrarconfoirmado();
-}
-class departamento{
-id,
-Nombre
+@startuml
+
+class Departamento {
+  ID
+  Nombre
 }
 
-class profesor {
-NRP,
-Nombre,
-Categoria,
-Area,
+class Profesor {
+  NRP
+  Nombre
+  Categoria
+  Area
 }
 
+class Grupo {
+  ID
+  Tipo
+}
+
+class SeMatriculaen {
+  Calificación
+}
+
+class Alumno {
+  DNI
+  Nombre
+  Direccion
+  Beca
+}
+
+class Asignatura {
+  ID
+  Nombre
+  Creditos
+  Caracter
+  Curso
+}
+
+class Asignada_a {
+  Día
+  Hora
+}
+
+class Aula {
+  ID
+  Capacidad
+}
+
+Departamento "1" --o "0..*" Profesor : "tiene"
+Profesor "1" -- "0..*" Grupo : "enseña"
+Grupo "1" <|-- "0..*" Asignatura : "contiene"
+Grupo "1" <|-- "0..*" Asignada_a : "tiene"
+Aula "1" --> "0..*" Asignada_a : "se asigna"
+Grupo "1" <|-- "0..*" SeMatriculaen : "tiene"
+Alumno "1" --> "0..*" SeMatriculaen : "se matricula"
 
 @enduml

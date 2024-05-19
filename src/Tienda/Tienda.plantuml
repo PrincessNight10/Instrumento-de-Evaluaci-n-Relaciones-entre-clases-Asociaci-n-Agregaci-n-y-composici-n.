@@ -1,0 +1,160 @@
+@startuml
+class  Proveedores {
+    Codigo_proveedor
+    Nombre_proveedor
+    Codigo_ciudad
+    Direccion
+    Telefono
+    Nombre_Contacto
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Entrada_Almacen {
+    Id
+    Fecha_entrada
+    Codigo_Componente
+    Cantidad_Comprada
+    Codigo_proveedor
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Info_Componentes {
+    Id
+    Codigo_Componente
+    Tipo_componente
+    Caracteristicas
+    Descripcion
+    Vlr_Unitario_Compra
+    Codigo_proveedor
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Detalle_Factura {
+    Id_Detalle
+    Id_Factura
+    Codigo_Componente
+    Cantidad_Vendida
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Detalle_Pedido {
+    Id_Detalle
+    Id_Pedido
+    Codigo_Componente
+    Cantidad_Solicitada
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Inventario {
+    Codigo_Compra
+    Componente
+    Vlr_Unitario_Venta
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Pedidos {
+    Id_Pedido
+    Fecha_Pedido
+    Nit_Cliente
+    Estado_Pedido
+    Id_Empleado
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Clientes {
+    Nit_Cliente
+    Nombre
+    Apellidos
+    Codigo_ciudad
+    Direccion
+    Telefono
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Ciudades {
+    Codigo_ciudad
+    Nombre
+    Departamento
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Facturas {
+    Id_Factura
+    Fecha_Factura
+    Nit_Cliente
+    Estado_Factura
+    Id_Empleado
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Empleados {
+    Id_Empleado
+    Nombre
+    Apellidos
+    Direccion
+    Telefono
+    Codigo_Cargo
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+class Cargos {
+    Codigo_Cargo
+    Nombre_Cargo
+    Salario
+    Adicionar()
+    Consultar()
+    Modificar()
+    Eliminar()
+}
+
+' Relaciones con cardinalidades
+Proveedores "1" -- "0..*" Entrada_Almacen : "provee"
+Proveedores "1" -- "0..*" Info_Componentes : "provee"
+Entrada_Almacen "0..*"-- "1" Inventario :  " Se va a"
+Inventario "1" -- "0..*" Detalle_Factura :"Se integra con"
+Info_Componentes "1" -- "0..*" Detalle_Factura : "se usa en"
+Info_Componentes "1" -- "0..*" Detalle_Pedido : "se usa en"
+Clientes "1" -- "0..*" Pedidos : "realiza"
+Clientes "0..*" --o "1" Ciudades : "contiene"
+Ciudades "1" -- "0..*" Proveedores : "contiene"
+Facturas "1" --* "0..*" Detalle_Factura : "contiene"
+Pedidos "1" --* "0..*" Detalle_Pedido : "contiene"
+Empleados "1" -- "0..*" Facturas : "realiza"
+Empleados "1" -- "0..*" Pedidos : "gestiona"
+Clientes "1" -- "0..*" Facturas : "tiene"
+Empleados "1" --o "0..*" Cargos : "gestiona"
+
+@enduml
